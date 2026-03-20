@@ -64,13 +64,17 @@ function deleteTodo(id) {
 }
 
 function updateTodo(id, newContent) {
+  if (!newContent || newContent.trim() === '') {
+    console.log('새 내용을 입력해 주세요.');
+    return;
+  }
   const todos = loadTodos();
   const todo = todos.find((t) => t.id === id);
   if (!todo) {
     console.log('해당 ID를 찾을 수 없습니다.');
     return;
   }
-  todo.content = newContent;
+  todo.content = newContent.trim();
   saveTodos(todos);
   console.log(`ID ${id}번 항목이 수정되었습니다: ${newContent}`);
 }
