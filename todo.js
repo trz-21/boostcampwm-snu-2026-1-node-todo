@@ -16,9 +16,13 @@ function saveTodos(todos) {
 }
 
 function addTodo(content) {
+  if (!content || content.trim() === '') {
+    console.log('할 일 내용을 입력해 주세요.');
+    return;
+  }
   const todos = loadTodos();
   const id = todos.length > 0 ? todos[todos.length - 1].id + 1 : 1;
-  todos.push({ id, content, done: false });
+  todos.push({ id, content: content.trim(), done: false });
   saveTodos(todos);
   console.log(`Todo가 추가되었습니다: ${content}`);
 }
